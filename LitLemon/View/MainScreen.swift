@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct MainScreen: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                Header()
+                Menu()
+            }
+        }
     }
 }
 
-#Preview {
-    MainScreen()
+struct MainScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        MainScreen().environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+    }
 }
